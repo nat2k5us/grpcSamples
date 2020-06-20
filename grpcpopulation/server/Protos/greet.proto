@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+option csharp_namespace = "server";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc GetGreeting (google.protobuf.Empty) returns (stream GreetingResponse);
+}
+
+// The request message containing the user's name.
+message GreetingRequest {
+  string country = 1;
+}
+
+// The response message containing the greetings.
+message GreetingResponse {
+  string greeting = 1;
+}
