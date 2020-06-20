@@ -14,14 +14,14 @@ namespace client
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello gRPC Demo! \n");
+            Console.WriteLine("Hello gRPC streaming Demo! \n");
             // This switch must be set before creating the GrpcChannel/HttpClient.
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             using var channel = GrpcChannel.ForAddress("http://localhost:5000");
             var client = new Greeter.GreeterClient(channel);
-            
+
             var token = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-            using var greetings = client.GetGreeting(new Empty(), 
+            using var greetings = client.GetGreeting(new Empty(),
             cancellationToken: token.Token);
             try
             {

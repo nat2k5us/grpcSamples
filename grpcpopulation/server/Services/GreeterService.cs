@@ -32,23 +32,13 @@ namespace server
             this.greeterManager = greeterManagerIn;
         }
 
-        // public override async Task<GreetingResponse> GetGreeting(IAsyncStreamReader<GreetingRequest> requestStream, ServerCallContext context)
-        // {
-        //     var countriesGreetings = new List<string>();
-        //     while (await requestStream.MoveNext())
-        //     {
-        //         var populationRequest = requestStream.Current;
-        //         countriesGreetings.Add(greeterManager.Get(populationRequest.Country));
-        //     }
-
-        //     return new GreetingResponse { Greeting = countriesGreetings.ToString() };
-        // }
+       
 
         public override async Task GetGreeting(Empty request, IServerStreamWriter<GreetingResponse> responseStream, ServerCallContext context)
         {
             while (!context.CancellationToken.IsCancellationRequested)
             {
-                await responseStream.WriteAsync(new GreetingResponse { Greeting = greeterManager.Get("INDIA") });
+                await responseStream.WriteAsync(new GreetingResponse { Greeting = greeterManager.GetRandom() });
             }
         }
     }

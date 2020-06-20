@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace server.Services
 {
     public interface IGreeterManager
-    {  
+    {
         string Get(string greeting);
+        string GetRandom();
     }
 
     public class GreeterManager : IGreeterManager
@@ -12,7 +16,10 @@ namespace server.Services
             { "INDIA", "Namaste" },
             { "USA", "Hello" },
             { "Tibet", "Tashi-Delek" },
-            { "Andhra", "Namaskaram" },
+            { "Telugu", "Namaskaram" },
+            { "Tamil", "Vanakam" },
+            { "Mexico", "Buenos dias" },
+            { "Japan", "Konnichiwa" },
         };
 
         public string Get(string country)
@@ -22,6 +29,12 @@ namespace server.Services
                 return countries[country];
             }
             return "Hello";
+        }
+        public string GetRandom()
+        {
+            Random rnd = new Random();
+            int n = rnd.Next(0, countries.Count);
+            return countries[countries.Keys.ToList()[n]];
         }
     }
 }
